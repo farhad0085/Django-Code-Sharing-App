@@ -18,6 +18,9 @@ class Code(models.Model):
     snippet = models.TextField()
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
+    is_private = models.BooleanField(default=False)
+    password = models.CharField(max_length=1000, default="")
+
     def __str__(self):
         return f"{self.language} - {self.code[:30]}"
 

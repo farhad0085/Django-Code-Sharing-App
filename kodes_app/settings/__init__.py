@@ -79,6 +79,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 SITENAME = "Kodes"
 TAGLINE = "Share your codes with anyone anytime"
