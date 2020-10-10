@@ -19,9 +19,5 @@ def home(request):
     context = {
         "form": form
     }
-    
-    messages.success(request, "Your code has been saved successfully")
-    messages.success(request, "Your code has been saved successfully")
-    messages.success(request, "Your code has been saved successfully")
 
     return render(request, "codes/home.html", context)

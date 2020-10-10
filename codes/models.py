@@ -17,10 +17,9 @@ class Code(models.Model):
     last_updated_utc = models.DateTimeField(auto_now=True, verbose_name="Last Updated")
     total_views = models.IntegerField(default=0)
 
-    snippet_title = models.CharField(max_length=1000, default="")
-    snippet_body = models.TextField()
-    language = models.ForeignKey(
-        Language, on_delete=models.SET_NULL, null=True)
+    snippet_title = models.CharField(max_length=1000, default="", verbose_name="Title/Filename")
+    snippet_body = models.TextField(verbose_name="Code Snippet")
+    language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
     is_private = models.BooleanField(default=False, verbose_name="Private")
     password = models.CharField(max_length=1000, default="", blank=True)

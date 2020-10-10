@@ -6,4 +6,4 @@ class CodeSubmissionForm(ModelForm):
     class Meta:
         model = Code
         fields = '__all__'
-        exclude = ['total_views']
+        exclude = ['total_views', 'author']
