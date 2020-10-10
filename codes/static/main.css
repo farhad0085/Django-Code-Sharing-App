@@ -1,5 +1,9 @@
 .top-navbar {
-    background-color: #0676E8;
+    background-color: #024064;
+}
+
+.tagline {
+    color: rgb(243, 237, 237);
 }
 
 a {
@@ -27,4 +31,20 @@ a {
 .header_sign a.btn-sign:hover {
     color: #000;
     background-color: #fff;
+}
+
+.alert-success {
+    color: #fff;
+    background-color: #7ad38f;
+}
+
+.alert-danger {
+    color: #fff;
+    background-color: #ce6363;
+}
+
+
+.alert-warning {
+    color: #fff;
+    background-color: #ddd66d;
 }

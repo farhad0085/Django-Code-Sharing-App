@@ -17,9 +17,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href='https://fonts.googleapis.com/css?family=Heebo' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Heebo' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'main.css' %}">
-    
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% block header_scripts %}
 
     {% endblock header_scripts %}
@@ -30,7 +31,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark top-navbar">
             <div class="container">
-                <a class="navbar-brand logo" href="{% url 'home' %}">{{SITENAME}}</a>
+                <a class="navbar-brand logo" href="{% url 'home' %}"><i class="fa fa-code mr-1"></i>{{SITENAME}}</a>
                 <span class="tagline">{{TAGLINE}}</span>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +51,18 @@
         </nav>
     </header>
 
-    <main class="container mb-4 mt-1">
+    <main class="container my-4">
+
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{%else%}{{message.tags}}{%endif%} alert-dismissible fade show"
+                role="alert">{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
 
         {% block content %}
 
