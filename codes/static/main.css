@@ -57,3 +57,13 @@ a {
 .code-submit:hover {
     background-color: #1b6b99;
 }
+
+.card.card-header.shared-snippet-title{
+    background-color: #024064;
+    color: #fff;
+}
+
+.card.card-header.shared-snippet-title:hover{
+    background-color: #115e8a;
+    color: #fff;
+}
