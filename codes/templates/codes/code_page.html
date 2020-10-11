@@ -1,18 +1,20 @@
 {% extends 'codes/base.html' %}
+{% load static %}
+{% block header_scripts %}
+<link rel="stylesheet" href="{% static 'prism/prism.css' %}">
+{% endblock header_scripts %}
+
 {% block content %}
 <div class="card my-4">
     <div class="card card-header shared-snippet-title" style="padding-bottom: 0px !important">
         <h3 class="card-title">{{code.snippet_title}}</h3>
     </div>
     <div class="card card-body">
-        {{ code.snippet_body }}
+        <pre><code class="language-python">{{ code.snippet_body }}</code></pre>
     </div>
 </div>
-<script>
-    console.log("{{code.snippet_body}}");
-</script>
 {% endblock content %}
 
-<td>{{ code.author.username }}</td>
-<td>{{ code.created_utc }}</td>
-<td class="text-center">{{ code.total_views }}</td>
+{% block footer_scripts %}
+<script src="{% static 'prism/prism.js' %}"></script>
+{% endblock footer_scripts %}

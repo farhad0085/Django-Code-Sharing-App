@@ -1,4 +1,3 @@
-from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from .forms import *
 from django.contrib import messages
@@ -17,7 +16,7 @@ def home(request):
             code.save()
 
             messages.success(request, "Your code has been saved successfully")
-            return redirect('home')
+            return redirect('code_view', code.id)
 
     # latest 10 public code snippet
     codes = Code.objects.order_by('-created_utc').all()
@@ -34,11 +33,11 @@ def home(request):
 
 def code_view(request, code_id):
     code = Code.objects.get(id=code_id)
-    details = {}
-    details['code'] = code.snippet_body
+    code.total_views = code.total_views + 1
+    code.save()
+
     context = {
         "code": code,
-        # "details": details
     }
-    # return JsonResponse(context)
+
     return render(request, "codes/code_page.html", context)

@@ -44,7 +44,7 @@
             <tbody>
                 {% for code in paginator %}
                     <tr>
-                        <td>{{ code.snippet_title }}</td>
+                        <td><a href="{% url 'code_view' code.id %}">{{ code.snippet_title }}</a></td>
                         <td>{{ code.author.username }}</td>
                         <td>{{ code.created_utc }}</td>
                         <td class="text-center">{{ code.total_views }}</td>
