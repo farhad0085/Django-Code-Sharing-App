@@ -1,0 +1,37 @@
+{% extends 'codes/base.html' %}
+
+{% block content %}
+
+<div class="card my-4">
+    <div class="card card-header shared-snippet-title" style="padding-bottom: 0px !important">
+        <h4 class="card-title card-link breadcumb"><a href="{% url 'home' %}">Home</a> &raquo; {{language}}</h4>
+    </div>
+    <div class="card card-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Title/Filename</th>
+                    <th>Shared By</th>
+                    <th>Uploaded</th>
+                    <th class="text-center">Total View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for code in paginator %}
+                    <tr>
+                        <td><a href="{% url 'code_view' code.id %}">{{ code.snippet_title }}</a></td>
+                        <td>{{ code.author.username }}</td>
+                        <td>{{ code.created_utc }}</td>
+                        <td class="text-center">{{ code.total_views }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block footer_scripts %}
+    
+{% endblock footer_scripts %}

@@ -8,7 +8,7 @@
 <div class="card my-4">
     <div class="card card-header shared-snippet-title" style="padding-bottom: 0px !important">
         <h4 class="card-title card-link breadcumb"><a href="{% url 'home' %}">Home</a> &raquo; <a
-                href="{% url 'home' %}">{{code.language.name}}</a> &raquo; {{code.snippet_title}} <span
+                href="{% url 'language_page' code.language.name %}">{{code.language.name}}</a> &raquo; {{code.snippet_title}} <span
                 class="float-right"><i class="fa fa-download" aria-hidden="true"></i></span></h4>
     </div>
     <div class="card card-body">
