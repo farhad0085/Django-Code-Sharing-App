@@ -37,7 +37,7 @@ def language_page(request, language_name):
     try:
         language = Language.objects.get(name__iexact=language_name)
     except:
-        response = render(request, '404.html',)
+        response = render(request, '404.html')
         response.status_code = 404
         return response
 

@@ -23,9 +23,16 @@
                         <td><b>Uploaded at:</b></td>
                         <td>{{code.created_utc|date:"dS F, Y h:i:s A"}}</td>
                     </tr>
+                    {% if code.created_utc != code.last_updated_utc %}
+                        <tr>
+                            <td><b>Last Updated:</b></td>
+                            <td>{{code.last_updated_utc|date:"dS F, Y h:i:s A"}}</td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td><b>Language:</b></td>
-                        <td>{{code.language.name}}</td>
+                        <td><a
+                            href="{% url 'language_page' code.language.name %}">{{code.language.name}}</a></td>
                     </tr>
                     <tr>
                         <td><b>Views:</b></td>
@@ -36,6 +43,17 @@
         </div>
         <pre><code class="language-html">{{ code.snippet_body }}</code></pre>
         <textarea class="form-control noscroll my-2" rows="15">{{ code.snippet_body }}</textarea>
+
+        <div class="card">
+            <div class="card card-header shared-snippet-title" style="padding-bottom: 0px !important">
+                <h4 class="card-title card-link breadcumb">Discussion
+                    <span class="float-right">5 Comments</span></h4>
+            </div>
+            <div class="card-body">
+                Comment section - Under Development
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock content %}
