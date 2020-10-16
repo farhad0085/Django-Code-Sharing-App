@@ -11,6 +11,11 @@ a {
     color: #c03;
 }
 
+.card-link.breadcumb a {
+    text-decoration: none;
+    color: white;
+}
+
 .header_sign a.btn-sign {
     display: inline-block;
     border: 1px solid #fff;
@@ -66,4 +71,11 @@ a {
 .card.card-header.shared-snippet-title:hover{
     background-color: #115e8a;
     color: #fff;
+}
+
+
+/* remove scrollbar from textarea */
+
+.noscroll::-webkit-scrollbar {
+    display: none;
 }
