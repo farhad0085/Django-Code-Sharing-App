@@ -42,15 +42,40 @@
             </div>
         </div>
         <pre><code class="language-html">{{ code.snippet_body }}</code></pre>
-        <textarea class="form-control noscroll my-2" rows="15">{{ code.snippet_body }}</textarea>
+        <textarea class="form-control noscroll my-2 mb-4" rows="15">{{ code.snippet_body }}</textarea>
 
         <div class="card">
             <div class="card card-header shared-snippet-title" style="padding-bottom: 0px !important">
                 <h4 class="card-title card-link breadcumb">Discussion
-                    <span class="float-right">5 Comments</span></h4>
+                    <span class="float-right">
+                        {% if comments.count > 1 %}
+                            {{comments.count}} Comments
+                        {% else %}
+                            {{comments.count}} Comment
+                        {% endif %}
+                    </span></h4>
             </div>
             <div class="card-body">
-                Comment section - Under Development
+                <form method="post" class="mb-3">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{form.body}}
+                    </div>
+                    <input type="submit" value="Post" class="btn btn-success code-submit">
+                </form>
+
+                {% for comment in comments %}
+                    {% if forloop.last %}
+                        <div class="border rounded p-2">
+                    {% else %}
+                        <div class="border rounded p-2 mb-2">
+                    {% endif %}
+                    <b>{{comment.author.username}}</b><span> at {{comment.datetime_utc|date:"dS F, Y h:i:s A"}} says:</span>
+                    <hr>
+                    <p>{{comment.body}}</p>
+                </div>
+                {% endfor %}
+
             </div>
         </div>
 
@@ -60,4 +85,12 @@
 
 {% block footer_scripts %}
 <script src="{% static 'prism/prism.js' %}"></script>
+
+<script>
+const body = $("#id_body")
+body.addClass("form-control")
+body.attr('placeholder', "Write something...")
+body.attr('rows', 5)
+</script>
+
 {% endblock footer_scripts %}

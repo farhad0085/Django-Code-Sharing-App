@@ -54,12 +54,39 @@ def language_page(request, language_name):
 
 
 def code_view(request, code_id):
-    code = Code.objects.get(id=code_id)
-    code.total_views = code.total_views + 1
-    code.save()
+
+    
+    form = CommentForm()
+
+    try:
+        code = Code.objects.get(id=code_id)
+        comments = code.comment_set.all()
+
+    except:
+        response = render(request, '404.html')
+        response.status_code = 404
+        return response
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.code = code
+
+            comment.save()
+
+            return redirect('code_view', code.id)
+
+    else:
+        code.total_views = code.total_views + 1
+        code.save()
 
     context = {
         "code": code,
+        "form": form,
+        "comments": comments
     }
 
     return render(request, "codes/code_page.html", context)

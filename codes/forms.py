@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.forms import fields
-from .models import Code, Language
+from .models import Code, Comment, Language
 
 class CodeSubmissionForm(ModelForm):
     
@@ -15,3 +15,9 @@ class CodeSubmissionForm(ModelForm):
         model = Code
         fields = '__all__'
         exclude = ['total_views', 'author']
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
