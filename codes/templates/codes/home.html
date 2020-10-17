@@ -1,5 +1,5 @@
 {% extends 'codes/base.html' %}
-
+{% load tz %}
 {% block content %}
 
 <form method="POST">
@@ -60,7 +60,7 @@
                         <td><a href="{% url 'code_view' code.id %}">{{ code.snippet_title|truncatechars:30 }}</a></td>
                         <td>{{ code.author.username|default:"Guest User" }}</td>
                         <td><a href="{% url 'language_page' code.language.name %}">{{ code.language.name }}</a></td>
-                        <td>{{code.created_utc|date:"dS F, Y h:i:s A"}}</td>
+                        <td>{% timezone "Asia/Dhaka" %}{{code.created_utc|date:"dS F, Y h:i:s A"}}{% endtimezone %}</td>
                         <td class="text-center">{{ code.comment_set.count }}</td>
                         <td class="text-center">{{ code.total_views }}</td>
                     </tr>
