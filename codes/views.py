@@ -1,11 +1,13 @@
 from django.shortcuts import redirect, render
 from .forms import *
 from django.contrib import messages
-from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 def home(request):
 
     form =  CodeSubmissionForm()
+
+    page = request.GET.get('page', 1)
 
     if request.method == "POST":
         form = CodeSubmissionForm(request.POST)
@@ -21,8 +23,16 @@ def home(request):
 
     # latest 10 public code snippet
     codes = Code.objects.order_by('-created_utc').all()
+    
     per_page = 10
-    paginator = Paginator(codes, per_page).get_page(1)
+    paginator = Paginator(codes, per_page)
+
+    try:
+        paginator = paginator.page(page)
+    except PageNotAnInteger:
+        paginator = paginator.page(1)
+    except EmptyPage:
+        paginator = paginator.page(paginator.num_pages)
 
     context = {
         "form": form,
@@ -35,6 +45,8 @@ def home(request):
 
 def language_page(request, language_name):
 
+    page = request.GET.get('page', 1)
+
     try:
         language = Language.objects.get(name__iexact=language_name)
     except:
@@ -44,7 +56,14 @@ def language_page(request, language_name):
 
     codes = Code.objects.order_by('-created_utc').filter(language__name__iexact=language_name).all()
     per_page = 10
-    paginator = Paginator(codes, per_page).get_page(1)
+    paginator = Paginator(codes, per_page)
+
+    try:
+        paginator = paginator.page(page)
+    except PageNotAnInteger:
+        paginator = paginator.page(1)
+    except EmptyPage:
+        paginator = paginator.page(paginator.num_pages)
 
     context = {
         "language": language_name,
