@@ -17,18 +17,12 @@
                 <table>
                     <tr>
                         <td><b>Uploaded By:</b></td>
-                        <td>{{code.author}}</td>
+                        <td>{{code.author|default:"Guest User"}}</td>
                     </tr>
                     <tr>
                         <td><b>Uploaded at:</b></td>
                         <td>{{code.created_utc|date:"dS F, Y h:i:s A"}}</td>
                     </tr>
-                    {% if code.created_utc != code.last_updated_utc %}
-                        <tr>
-                            <td><b>Last Updated:</b></td>
-                            <td>{{code.last_updated_utc|date:"dS F, Y h:i:s A"}}</td>
-                        </tr>
-                    {% endif %}
                     <tr>
                         <td><b>Language:</b></td>
                         <td><a
@@ -41,7 +35,7 @@
                 </table>
             </div>
         </div>
-        <pre><code class="language-html">{{ code.snippet_body }}</code></pre>
+        <pre><code class="language-{{code.language.short_name}}">{{ code.snippet_body }}</code></pre>
         <textarea class="form-control noscroll my-2 mb-4" rows="15">{{ code.snippet_body }}</textarea>
 
         <div class="card">
@@ -56,6 +50,7 @@
                     </span></h4>
             </div>
             <div class="card-body">
+                {% if request.user.is_authenticated %}
                 <form method="post" class="mb-3">
                     {% csrf_token %}
                     <div class="form-group">
@@ -63,6 +58,9 @@
                     </div>
                     <input type="submit" value="Post" class="btn btn-success code-submit">
                 </form>
+                {% else %}
+                    <p>Please login to post a comment!</p>
+                {% endif %}
 
                 {% for comment in comments %}
                     {% if forloop.last %}
@@ -85,6 +83,8 @@
 
 {% block footer_scripts %}
 <script src="{% static 'prism/prism.js' %}"></script>
+<script src="{% static 'prism/prism-python.min.js' %}"></script>
+
 
 <script>
 const body = $("#id_body")

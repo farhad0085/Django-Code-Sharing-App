@@ -12,7 +12,7 @@ def home(request):
 
         if form.is_valid():
             code = form.save(commit=False)
-            code.author = request.user
+            code.author = request.user if request.user.is_authenticated else None
             code.save()
 
             messages.success(request, "Your code has been saved successfully")
