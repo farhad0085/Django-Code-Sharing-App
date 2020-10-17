@@ -9,8 +9,9 @@ def home(request):
 
     if request.method == "POST":
         form = CodeSubmissionForm(request.POST)
-
+        
         if form.is_valid():
+            
             code = form.save(commit=False)
             code.author = request.user if request.user.is_authenticated else None
             code.save()
@@ -50,7 +51,7 @@ def language_page(request, language_name):
         "paginator": paginator
     }
 
-    return render(request, "codes/language_page.html", context)
+    return render(request, "codes/language_specific.html", context)
 
 
 def code_view(request, code_id):

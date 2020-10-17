@@ -12,24 +12,24 @@
                 class="float-right"><i class="fa fa-download" aria-hidden="true"></i></span></h4>
     </div>
     <div class="card card-body">
-        <div class="card">
+        <div class="card mb-2">
             <div class="card-body">
-                <table>
+                <table class="table table-borderless table-sm">
                     <tr>
-                        <td><b>Uploaded By:</b></td>
+                        <th>Uploaded By</th>
                         <td>{{code.author|default:"Guest User"}}</td>
                     </tr>
                     <tr>
-                        <td><b>Uploaded at:</b></td>
+                        <th>Uploaded at</th>
                         <td>{{code.created_utc|date:"dS F, Y h:i:s A"}}</td>
                     </tr>
                     <tr>
-                        <td><b>Language:</b></td>
+                        <th>Language</th>
                         <td><a
                             href="{% url 'language_page' code.language.name %}">{{code.language.name}}</a></td>
                     </tr>
                     <tr>
-                        <td><b>Views:</b></td>
+                        <th>Views</th>
                         <td>{{code.total_views}}</td>
                     </tr>
                 </table>
@@ -43,9 +43,11 @@
                 <h4 class="card-title card-link breadcumb">Discussion
                     <span class="float-right">
                         {% if comments.count > 1 %}
-                            {{comments.count}} Comments
+                            {{comments.count}} comments
+                        {% elif comments.count == 1 %}
+                            {{comments.count}} comment
                         {% else %}
-                            {{comments.count}} Comment
+                            No comments yet
                         {% endif %}
                     </span></h4>
             </div>

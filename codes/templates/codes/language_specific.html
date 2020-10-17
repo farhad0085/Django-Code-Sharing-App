@@ -12,16 +12,20 @@
                 <tr>
                     <th>Title/Filename</th>
                     <th>Shared By</th>
-                    <th>Uploaded</th>
-                    <th class="text-center">Total View</th>
+                    <th>Language</th>
+                    <th>Uploaded at</th>
+                    <th class="text-center">Comments</th>
+                    <th class="text-center">View</th>
                 </tr>
             </thead>
             <tbody>
                 {% for code in paginator %}
                     <tr>
-                        <td><a href="{% url 'code_view' code.id %}">{{ code.snippet_title }}</a></td>
+                        <td><a href="{% url 'code_view' code.id %}">{{ code.snippet_title|truncatechars:30 }}</a></td>
                         <td>{{ code.author.username|default:"Guest User" }}</td>
-                        <td>{{ code.created_utc }}</td>
+                        <td>{{ code.language.name }}</td>
+                        <td>{{code.created_utc|date:"dS F, Y h:i:s A"}}</td>
+                        <td class="text-center">{{ code.comment_set.count }}</td>
                         <td class="text-center">{{ code.total_views }}</td>
                     </tr>
                 {% endfor %}

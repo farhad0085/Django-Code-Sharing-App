@@ -9,7 +9,7 @@ class CodeSubmissionForm(ModelForm):
         
         language = Language.objects.order_by('-is_popular', 'name').all()
 
-        self.fields['language'].choices = [[lang.language_code, lang.name] for lang in language]
+        self.fields['language'].choices = [[lang.pk, lang.name] for lang in language]
 
     class Meta:
         model = Code
