@@ -1,5 +1,6 @@
 {% extends 'codes/base.html' %}
 {% load static %}
+{% load tz %}
 {% block header_scripts %}
 <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
 {% endblock header_scripts %}
@@ -21,7 +22,7 @@
                     </tr>
                     <tr>
                         <th>Uploaded at</th>
-                        <td>{{code.created_utc|date:"dS F, Y h:i:s A"}}</td>
+                        <td>{% timezone "Asia/Dhaka" %}{{code.created_utc|date:"dS F, Y h:i:s A"}}{% endtimezone %}</td>
                     </tr>
                     <tr>
                         <th>Language</th>
@@ -70,7 +71,7 @@
                     {% else %}
                         <div class="border rounded p-2 mb-2">
                     {% endif %}
-                    <b>{{comment.author.username}}</b><span> at {{comment.datetime_utc|date:"dS F, Y h:i:s A"}} says:</span>
+                    <b>{{comment.author.username}}</b><span> at {{comment.datetime_utc|timezone:"Asia/Dhaka"|date:"dS F, Y h:i:s A"}} says:</span>
                     <hr>
                     <p>{{comment.body}}</p>
                 </div>
