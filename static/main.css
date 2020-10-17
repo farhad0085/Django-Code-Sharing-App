@@ -1,0 +1,63 @@
+.top-navbar {
+    background-color: #024064;
+}
+
+.tagline {
+    color: rgb(243, 237, 237);
+}
+
+a {
+    text-decoration: none;
+    color: #c03;
+}
+
+.card-link.breadcumb a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav .nav-item .nav-link{
+    color: #fff;
+}
+
+.alert-success {
+    color: #fff;
+    background-color: #8bce9b;
+}
+
+.alert-danger {
+    color: #fff;
+    background-color: #ce6363;
+}
+
+.alert-warning {
+    color: #fff;
+    background-color: #ddd66d;
+}
+
+.code-submit {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #024064;
+}
+
+.code-submit:hover {
+    background-color: #1b6b99;
+}
+
+.card.card-header.shared-snippet-title{
+    background-color: #024064;
+    color: #fff;
+}
+
+.card.card-header.shared-snippet-title:hover{
+    background-color: #115e8a;
+    color: #fff;
+}
+
+
+/* remove scrollbar from textarea */
+
+.noscroll::-webkit-scrollbar {
+    display: none;
+}
